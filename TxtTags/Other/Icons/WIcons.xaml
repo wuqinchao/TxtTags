@@ -1,0 +1,105 @@
+﻿<hc:Window x:Class="TxtTags.WIcons"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:local="clr-namespace:TxtTags"
+        mc:Ignorable="d" Background="#FFFFFF"
+        Title="WIcons" Height="450" Width="800">
+    <Window.Resources>
+        <!--<Style x:Key="Icon" BasedOn="{StaticResource ButtonIconCircular}" TargetType="Button">
+            <Setter Property="Padding" Value="8" />
+            <Setter Property="Margin" Value="8" />
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="hc:IconElement.Height" Value="20" />
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>-->
+    </Window.Resources>
+    <Grid>
+        <local:UIcons />
+        <!--<WrapPanel Orientation="Horizontal">
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource NewGeometry}" CommandParameter="NewGeometry" />
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource EmailGeometry}" CommandParameter="EmailGeometry" />
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource WebsiteGeometry}" CommandParameter="WebsiteGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource ThumbsUpGeometry}" CommandParameter="ThumbsUpGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource ImageGeometry}" CommandParameter="ImageGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource KeyboardGeometry}" CommandParameter="KeyboardGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource LoveGeometry}" CommandParameter="LoveGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource ConfigGeometry}" CommandParameter="ConfigGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource ContributorsGeometry}" CommandParameter="ContributorsGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource ProjectGeometry}" CommandParameter="ProjectGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource BlogGeometry}" CommandParameter="BlogGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource VisualStudioGeometry}" CommandParameter="VisualStudioGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource CodeGeometry}" CommandParameter="CodeGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource WikiGeometry}" CommandParameter="WikiGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource DocGeometry}" CommandParameter="DocGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource DocumentGeometry}" CommandParameter="DocumentGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource LockGeometry}" CommandParameter="LockGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource UnLockGeometry}" CommandParameter="UnLockGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource CopyFillGeometry}" CommandParameter="CopyFillGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource CopyGeometry}" CommandParameter="CopyGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource SaveFillGeometry}" CommandParameter="SaveFillGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource SaveGeometry}" CommandParameter="SaveGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource FolderFillGeometry}" CommandParameter="FolderGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource FolderGeometry}" CommandParameter="FolderGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource OpenFolderFillGeometry}" CommandParameter="OpenFolderFillGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource OpenFolderGeometry}" CommandParameter="OpenFolderGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource RefreshGeometry}" CommandParameter="RefreshGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource HistoryGeometry}" CommandParameter="HistoryGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource ShareGeometry}" CommandParameter="ShareGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource CloseGeometry}" CommandParameter="CloseGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource DotGeometry}" CommandParameter="DotGeometry"/>
+
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource RectSuccFillGeometry}" CommandParameter="RectSuccFillGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource RectSuccGeometry}" CommandParameter="RectSuccGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource RectPlusFillGeometry}" CommandParameter="RectPlusFillGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource RectPlusGeometry}" CommandParameter="RectPlusGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource RectMinusFillGeometry}" CommandParameter="RectMinusFillGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource RectMinusGeometry}" CommandParameter="RectMinusGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource RectFillGeometry}" CommandParameter="RectFillGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource RectGeometry}" CommandParameter="RectGeometry"/>
+
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource SuccGeometry}" CommandParameter="SuccGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource PlusGeometry}" CommandParameter="PlusGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource MinusGeometry}" CommandParameter="MinusGeometry"/>
+
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource SuccFillCircleGeometry}" CommandParameter="SuccFillCircleGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource ErrFillCircleGeometry}" CommandParameter="ErrFillCircleGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource InfoFillCircleGeometry}" CommandParameter="InfoFillCircleGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource WarnFillCircleGeometry}" CommandParameter="WarnFillCircleGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource PlusFillCircleGeometry}" CommandParameter="PlusFillCircleGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource MinusFillCircleGeometry}" CommandParameter="MinusFillCircleGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource HelpFillCircleGeometry}" CommandParameter="HelpFillCircleGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource TimeFillCircleGeometry}" CommandParameter="TimeFillCircleGeometry"/>
+
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource SuccCircleGeometry}" CommandParameter="SuccCircleGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource ErrCircleGeometry}" CommandParameter="ErrCircleGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource InfoCircleGeometry}" CommandParameter="InfoCircleGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource WarnCircleGeometry}" CommandParameter="WarnCircleGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource PlusCircleGeometry}" CommandParameter="PlusCircleGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource MinusCircleGeometry}" CommandParameter="MinusCircleGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource HelpCircleGeometry}" CommandParameter="HelpCircleGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource TimeCircleGeometry}" CommandParameter="TimeCircleGeometry"/>
+
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource TxtFileFillGeometry}" CommandParameter="TxtFileFillGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource TxtFileGeometry}" CommandParameter="TxtFileGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource BookFillGeometry}" CommandParameter="BookFillGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource BookGeometry}" CommandParameter="BookGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource FontGeometry}" CommandParameter="FontGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource LineHeightGeometry}" CommandParameter="LineHeightGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource FontSizeGeometry}" CommandParameter="FontSizeGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource FontColorGeometry}" CommandParameter="FontColorGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource FontBackgroundGeometry}" CommandParameter="FontBackgroundGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource DownGeometry}" CommandParameter="DownGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource ToTopGeometry}" CommandParameter="ToTopGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource ListNumGeometry}" CommandParameter="ListNumGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource ListGeometry}" CommandParameter="ListGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource MapGeometry}" CommandParameter="MapGeometry"/>
+            <Button Command="local:WIcons.CopyCmd" Style="{DynamicResource Icon}" hc:IconElement.Geometry="{StaticResource MapFillGeometry}" CommandParameter="MapFillGeometry"/>
+        </WrapPanel>-->        
+    </Grid>
+</hc:Window>

@@ -1,0 +1,71 @@
+﻿<hc:Window x:Class="TxtTags.WViewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:local="clr-namespace:TxtTags"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Title="WViewer" Height="450" Width="800">
+    <hc:Window.NonClientAreaContent>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <ToggleButton x:Name="ToggleFont" Grid.Column="8" HorizontalAlignment="Center" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" VerticalAlignment="Center" Margin="8,4,0,0">
+                    <StackPanel>
+                        <TextBlock Text="字体" />
+                        <Popup Name="myPopup" IsOpen="{Binding IsChecked, ElementName=ToggleFont, Mode=TwoWay}" Width="560" Placement="Mouse" StaysOpen="False" AllowsTransparency="True">
+                            <Border CornerRadius="4" Padding="16,32" Background="#ffffff" BorderBrush="#80333333" BorderThickness="1">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="字体大小" FontSize="16" />
+                                        <Slider Width="400" Margin="8,0,8,0" hc:TipElement.Placement="Top" IsSnapToTickEnabled="True" Minimum="10" Maximum="40" Value="{Binding DocFontSize}" TickFrequency="1" TickPlacement="BottomRight"/>
+                                        <TextBlock Text="{Binding DocFontSize, StringFormat={}{0}px}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                                        <TextBlock Text="行距大小" FontSize="16" />
+                                        <Slider Width="400" Margin="8,0,8,0" hc:TipElement.Placement="Top" IsSnapToTickEnabled="True" Minimum="1" Maximum="2" Value="{Binding LineHeight}" TickFrequency="0.1" TickPlacement="BottomRight"/>
+                                        <TextBlock Text="{Binding LineHeight, StringFormat={}{0}倍}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                                        <TextBlock Text="最大页宽" FontSize="16" />
+                                        <Slider Width="400" Margin="8,0,8,0" hc:TipElement.Placement="Top" IsSnapToTickEnabled="True" Minimum="400" Maximum="1920" Value="{Binding ColumnWidth}" TickFrequency="100" TickPlacement="BottomRight"/>
+                                        <TextBlock Text="{Binding ColumnWidth, StringFormat={}{0}px}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                                        <TextBlock Text="页面间距" FontSize="16" />
+                                        <Slider Width="400" Margin="8,0,8,0" hc:TipElement.Placement="Top" IsSnapToTickEnabled="True" Minimum="0" Maximum="100" Value="{Binding ColumnGap}" TickFrequency="10" TickPlacement="BottomRight"/>
+                                        <TextBlock Text="{Binding ColumnGap, StringFormat={}{0}px}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                                        <TextBlock Text="页间距宽" FontSize="16" />
+                                        <Slider Width="400" Margin="8,0,8,0" hc:TipElement.Placement="Top" IsSnapToTickEnabled="True" Minimum="0" Maximum="50" Value="{Binding ColumnRuleWidth}" TickFrequency="5" TickPlacement="BottomRight"/>
+                                        <TextBlock Text="{Binding ColumnRuleWidth, StringFormat={}{0}px}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </Popup>
+                    </StackPanel>
+                </ToggleButton>
+            </StackPanel>
+        </Grid>
+    </hc:Window.NonClientAreaContent>
+    <Grid>
+        <!--<FlowDocumentReader Name="FlowDocReader" Background="LightBlue" IsScrollViewEnabled="True" />-->
+        <FlowDocumentReader Name="FlowDocReader" Background="LightBlue" IsScrollViewEnabled="True" IsTwoPageViewEnabled="True" ViewingMode="Page">
+            <FlowDocument 
+                ColumnGap="{Binding ColumnGap}" 
+                ColumnRuleBrush="DodgerBlue" 
+                ColumnRuleWidth="{Binding ColumnRuleWidth}" 
+                ColumnWidth="{Binding ColumnWidth}" 
+                FontSize="{Binding DocFontSize}" 
+                LineHeight="{Binding LineHeightValue}">
+                <Paragraph x:Name="PreParagraph"></Paragraph>
+            </FlowDocument>
+        </FlowDocumentReader>
+    </Grid>
+</hc:Window>

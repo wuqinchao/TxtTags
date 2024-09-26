@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5F8F542B-F23B-41B1-939E-260C01F0B30D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TxtTags</RootNamespace>
+    <AssemblyName>TxtTags</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HandyControl, Version=3.5.1.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
+      <HintPath>..\packages\HandyControl.3.5.1\lib\net462\HandyControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UtfUnknown, Version=2.0.0.0, Culture=neutral, PublicKeyToken=90217ce7a23260d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\UTF.Unknown.2.5.1\lib\net40\UtfUnknown.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Common\AnimationHelper.cs" />
+    <Compile Include="Common\Crypto.cs" />
+    <Compile Include="Common\FileReader.cs" />
+    <Compile Include="Func\UNormalizeOption.xaml.cs">
+      <DependentUpon>UNormalizeOption.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LogLevel.cs" />
+    <Compile Include="Service\LogService.cs" />
+    <Compile Include="Service\NormalizeHelper.cs" />
+    <Compile Include="Service\CatalogHelper.cs" />
+    <Compile Include="Entity\BookmarkInfo.cs" />
+    <Compile Include="Service\BookmarkService.cs" />
+    <Compile Include="Viewer\NewLineHelper.cs" />
+    <Compile Include="Viewer\TextSegment.cs" />
+    <Compile Include="Viewer\USearcher.xaml.cs">
+      <DependentUpon>USearcher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wpf\ColumnDefinitionExtended.cs" />
+    <Compile Include="Common\config.cs" />
+    <Compile Include="Common\ResourceHelper.cs" />
+    <Compile Include="Func\DFileEncoding.xaml.cs">
+      <DependentUpon>DFileEncoding.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DInput.xaml.cs">
+      <DependentUpon>DInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DBatchTagSelection.xaml.cs">
+      <DependentUpon>DBatchTagSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CatalogInfo.cs" />
+    <Compile Include="Extension\StringExtension.cs" />
+    <Compile Include="Other\Icons\GeometryItemModel.cs" />
+    <Compile Include="Service\FileEncodingService.cs" />
+    <Compile Include="Viewer\UBookView.xaml.cs">
+      <DependentUpon>UBookView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Other\Icons\UIcons.xaml.cs">
+      <DependentUpon>UIcons.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\WBook.xaml.cs">
+      <DependentUpon>WBook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Other\Icons\WIcons.xaml.cs">
+      <DependentUpon>WIcons.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wpf\BindingProxy.cs" />
+    <Compile Include="Common\Regex.cs" />
+    <Compile Include="Converter\BoolConverter.cs" />
+    <Compile Include="Converter\CalcConverter.cs" />
+    <Compile Include="Converter\FileConverter.cs" />
+    <Compile Include="Dialog\DTagSelection.xaml.cs">
+      <DependentUpon>DTagSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TagFileInfo.cs" />
+    <Compile Include="Controls\UStar.xaml.cs">
+      <DependentUpon>UStar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wrapper\FileOperation.cs" />
+    <Compile Include="Wrapper\WinApi.cs" />
+    <Compile Include="Func\WRename.xaml.cs">
+      <DependentUpon>WRename.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Converter\Converter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Func\DFileEncoding.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\DInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\DRepoEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\DTagEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\DBatchTagSelection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\DTagSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Func\UNormalizeOption.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\EnumConvert.cs" />
+    <Compile Include="Common\EnumerationExtension.cs" />
+    <Compile Include="Common\FilePath.cs" />
+    <Compile Include="Common\FileSize.cs" />
+    <Compile Include="Common\NotifyPropertyBase.cs" />
+    <Compile Include="Common\WinManager.cs" />
+    <Compile Include="Dialog\DRepoEdit.xaml.cs">
+      <DependentUpon>DRepoEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DTagEdit.xaml.cs">
+      <DependentUpon>DTagEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\BookTags.cs" />
+    <Compile Include="Entity\QueryOption.cs" />
+    <Compile Include="Entity\Repo\Repos.cs" />
+    <Compile Include="Entity\Repo\Repo.cs" />
+    <Compile Include="Common\Result.cs" />
+    <Compile Include="Common\SortableObservableCollection.cs" />
+    <Compile Include="Entity\EverythingFile.cs" />
+    <Compile Include="Pages\PRepo\PRepo.xaml.cs">
+      <DependentUpon>PRepo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PRepo\PRepos.xaml.cs">
+      <DependentUpon>PRepos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PTags\WTags.xaml.cs">
+      <DependentUpon>WTags.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Service\QueryService.cs" />
+    <Compile Include="Controls\UBook.xaml.cs">
+      <DependentUpon>UBook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wrapper\EverythingWrapper.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Pages\PRepo\PRepo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PRepo\PRepos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PTags\WTags.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UStar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Brushs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Geometries.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Paths.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Viewer\UBookView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Other\Icons\UIcons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Viewer\USearcher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Viewer\WBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Other\Icons\WIcons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Func\WRename.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cloud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
+      <Project>{c198e813-1e16-4119-948c-89ea5c39be7b}</Project>
+      <Name>ICSharpCode.AvalonEdit</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

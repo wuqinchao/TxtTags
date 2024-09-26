@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="TxtTags.Func.UNormalizeOption"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:local="clr-namespace:TxtTags.Func"
+             mc:Ignorable="d" x:Name="me" Background="{StaticResource BackgroundBrush}" BorderThickness="2" BorderBrush="{StaticResource SecondaryBorderBrush}"
+             d:DesignHeight="300" d:DesignWidth="300" Height="300" Width="300">
+    <Border Padding="16,8" Height="300" Width="300">
+        <StackPanel Orientation="Vertical">
+            <StackPanel.Resources>
+                <Style TargetType="StackPanel">
+                    <Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
+                </Style>
+                <Style TargetType="ToggleButton">
+                    <Setter Property="Margin" Value="0,0,8,0" />
+                </Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="FontSize" Value="12" />
+                </Style>
+            </StackPanel.Resources>
+            <StackPanel Orientation="Horizontal">
+                <ToggleButton Background="#C0FFFFFF" IsChecked="{Binding Option.Newline, ElementName=me}" Margin="5,8" HorizontalAlignment="Center" Style="{StaticResource ToggleButtonSwitch}" hc:VisualElement.HighlightBrush="{DynamicResource SuccessBrush}" Content="" />
+                <TextBlock Text="规范换行" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ToggleButton Background="#C0FFFFFF" IsChecked="{Binding Option.Section, ElementName=me}" Margin="5,8" HorizontalAlignment="Center" Style="{StaticResource ToggleButtonSwitch}" hc:VisualElement.HighlightBrush="{DynamicResource SuccessBrush}" Content="" />
+                <TextBlock Text="重新分段（按句号和双引号）" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ToggleButton Background="#C0FFFFFF" IsChecked="{Binding Option.OneNewline, ElementName=me}" Margin="5,8" HorizontalAlignment="Center" Style="{StaticResource ToggleButtonSwitch}" hc:VisualElement.HighlightBrush="{DynamicResource SuccessBrush}" Content="" />
+                <TextBlock Text="只保留一个空行" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ToggleButton Background="#C0FFFFFF" IsChecked="{Binding Option.MeaninglessLine, ElementName=me}" Margin="5,8" HorizontalAlignment="Center" Style="{StaticResource ToggleButtonSwitch}" hc:VisualElement.HighlightBrush="{DynamicResource SuccessBrush}" Content="" />
+                <TextBlock Text="去除无意义行" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ToggleButton Background="#C0FFFFFF" IsChecked="{Binding Option.Linehead, ElementName=me}" Margin="5,8" HorizontalAlignment="Center" Style="{StaticResource ToggleButtonSwitch}" hc:VisualElement.HighlightBrush="{DynamicResource SuccessBrush}" Content="" />
+                <TextBlock Text="段头统一使用\t" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ToggleButton Background="#C0FFFFFF" IsChecked="{Binding Option.Simplified, ElementName=me}" Margin="5,8" HorizontalAlignment="Center" Style="{StaticResource ToggleButtonSwitch}" hc:VisualElement.HighlightBrush="{DynamicResource SuccessBrush}" Content="" />
+                <TextBlock Text="转为简体中文" />
+            </StackPanel>
+            <Grid Margin="0,8,0,0">
+                <Button Style="{StaticResource ButtonInfo}" Height="25"  Padding="16,0" Content="确定" HorizontalAlignment="Right"></Button>
+            </Grid>
+        </StackPanel>
+    </Border>
+</UserControl>

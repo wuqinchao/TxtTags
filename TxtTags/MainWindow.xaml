@@ -1,0 +1,75 @@
+﻿<hc:Window x:Class="TxtTags.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:cn="clr-namespace:TxtTags.Common"
+        xmlns:local="clr-namespace:TxtTags" x:Name="main"
+        mc:Ignorable="d" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Title="本地图书管理" Height="450" Width="800" Icon="/app.ico">
+    <hc:Window.Resources>
+        <local:BindingProxy x:Key="BindingProxy" Data="{Binding}"/>
+        <local:BookShowConvert x:Key="cvtBookShow" />
+    </hc:Window.Resources>
+    <hc:Window.NonClientAreaContent>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" VerticalAlignment="Stretch" Orientation="Horizontal">
+                <TextBlock Text="{Binding Configer.Version.FileVersion, StringFormat={}v{0}}" FontSize="13" VerticalAlignment="Center" Margin="8,5,0,3" Foreground="#333333"></TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Command="local:MainWindow.ToTagsCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource ConfigGeometry}"/>
+                <Button Command="local:MainWindow.LockCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource LockGeometry}"
+                        Visibility="{Binding Configer.Locked, Converter={StaticResource cvtHideWhenFalse}}"/>
+                <Button Command="local:MainWindow.LockCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource UnLockGeometry}"
+                        Visibility="{Binding Configer.Locked, Converter={StaticResource cvtShowWhenFalse}}"/>
+                <Button Command="local:MainWindow.CreateCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource PlusFillCircleGeometry}" Foreground="{StaticResource DarkPrimaryBrush}" hc:IconElement.Height="16" />
+            </StackPanel>
+        </Grid>
+    </hc:Window.NonClientAreaContent>
+    <Grid>
+        <Border Padding="40" Grid.Row="1" Style="{StaticResource BorderRegion}" Background="{StaticResource CloudDrawingBrush}">
+            <ScrollViewer Grid.Row="1" Padding="16" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Background="Transparent" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" PanningMode="HorizontalOnly">
+                <ItemsControl ItemsSource="{Binding DataSource.Items}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Margin="0,0,0,0" IsItemsHost="True" Orientation="Horizontal" VerticalAlignment="Stretch" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="0" Margin="8,8" CornerRadius="4" BorderBrush="{StaticResource DarkPrimaryBrush}" BorderThickness="1" Background="{StaticResource DarkPrimaryBrush}" Width="350" Height="200"
+                                    Tag="{Binding}">
+                                <Border.Visibility>
+                                    <MultiBinding Converter="{StaticResource cvtBookShow}">
+                                        <Binding />
+                                        <Binding Path="Configer.Locked" ElementName="main" />
+                                    </MultiBinding>
+                                </Border.Visibility>
+                                <Border.ContextMenu>
+                                    <ContextMenu DataContext="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+                                        <MenuItem Header="编辑" Command="local:MainWindow.UpateCmd" CommandParameter="{Binding Id}" />
+                                        <MenuItem Header="删除" Command="local:MainWindow.DeleteCmd" CommandParameter="{Binding Id}" />
+                                    </ContextMenu>
+                                </Border.ContextMenu>
+                                <Border.InputBindings>
+                                    <MouseBinding MouseAction="LeftClick" Command="local:MainWindow.SelectCmd" CommandParameter="{Binding}" />
+                                </Border.InputBindings>
+                                <Grid Margin="10,10">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Name}" Foreground="#FFFFFF" FontSize="30" />
+                                    </StackPanel>
+                                    <!--<Button Command="local:MainWindow.DeleteCmd" CommandParameter="{Binding Id}" Background="{x:Null}" BorderBrush="Transparent" Foreground="#FFFFFF" Width="30" Height="30" Padding="7" hc:IconElement.Geometry="{StaticResource RemoveGeometry}" HorizontalAlignment="Right" VerticalAlignment="Top"/>-->
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</hc:Window>

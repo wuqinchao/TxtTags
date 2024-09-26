@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="TxtTags.UStar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TxtTags"
+             mc:Ignorable="d" x:Name="ustar"
+             d:DesignHeight="50" d:DesignWidth="100">
+    <Grid>
+        <ItemsControl ItemsSource="{Binding Values, ElementName=ustar}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <hc:UniformSpacingPanel Spacing="2" Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Button Command="local:UStar.ValueChangedCmd" CommandParameter="{Binding}" Style="{StaticResource ButtonIcon.Small}" Height="{Binding Height,ElementName=ustar}" hc:IconElement.Geometry="{StaticResource StarGeometry}" 
+                                Foreground="{Binding TrueColor, ElementName=ustar}" hc:IconElement.Height="{Binding IconSize, ElementName=ustar}" Margin="0" Padding="0">
+                            <Button.Visibility>
+                                <MultiBinding Converter="{StaticResource cvtMLessHide}">
+                                    <Binding Path="Value" ElementName="ustar" />
+                                    <Binding />
+                                </MultiBinding>
+                            </Button.Visibility>
+                        </Button>
+                        <Button Command="local:UStar.ValueChangedCmd" CommandParameter="{Binding}" Style="{StaticResource ButtonIcon.Small}" Height="{Binding Height,ElementName=ustar}" hc:IconElement.Geometry="{StaticResource StarGeometry}" 
+                                Foreground="{Binding FalseColor, ElementName=ustar}" hc:IconElement.Height="{Binding IconSize, ElementName=ustar}" Margin="0" Padding="0">
+                            <Button.Visibility>
+                                <MultiBinding Converter="{StaticResource cvtMLessShow}">
+                                    <Binding Path="Value" ElementName="ustar" />
+                                    <Binding />
+                                </MultiBinding>
+                            </Button.Visibility>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!--<Button Command="local:UStar.ValueChangedCmd" CommandParameter="1" Style="{StaticResource ButtonIcon.Small}" Height="{Binding Height,ElementName=ustar}" hc:IconElement.Geometry="{StaticResource StarGeometry}" 
+        Foreground="red" hc:IconElement.Height="{Binding IconSize, ElementName=ustar}" Margin="0" Padding="0">
+        </Button>-->
+    </Grid>
+</UserControl>

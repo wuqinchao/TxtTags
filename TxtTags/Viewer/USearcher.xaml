@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="TxtTags.USearcher"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TxtTags"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             mc:Ignorable="d" x:Name="me"
+             d:DesignHeight="300" d:DesignWidth="240">
+    <Border Background="{StaticResource SecondaryRegionBrush}" CornerRadius="4">
+        <Grid Margin="0,0,4,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" BorderThickness="0,0,0,1" Padding="0,2">
+                <hc:TextBox x:Name="TxtKeyword" PreviewKeyDown="Keywords_PreviewKeyDown" hc:InfoElement.ShowClearButton="True" Height="28" 
+                            Text="{Binding Keyword, Mode=TwoWay, ElementName=me,UpdateSourceTrigger=PropertyChanged}" 
+                            IsEnabled="{Binding Running, ElementName=me, Converter={StaticResource cvtIsFalse}}"/>
+            </Border>
+            <Border Grid.Row="1" x:Name="MainContent" Background="#FFFFFF" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="1,1,5,1">
+                <ListBox x:Name="View_Bookmark" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0,0,0,0" Background="Transparent"
+                    SelectionMode="Single" ItemsSource="{Binding Results, ElementName=me}" BorderBrush="Transparent" BorderThickness="0">
+                    <ListBox.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource ListBoxItemBaseStyle}" TargetType="ListBoxItem">
+                            <Setter Property="Background" Value="{StaticResource RegionBrush}" />
+                            <Setter Property="Height" Value="Auto" />
+                            <Setter Property="hc:BorderElement.CornerRadius" Value="0" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="true">
+                                    <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource TextIconBrush}"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Background" Value="{DynamicResource SecondaryRegionBrush}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Button Height="Auto" Margin="0" Padding="0" Background="Transparent" 
+                                    Command="local:USearcher.ToSearchReultCmd" CommandParameter="{Binding}"
+                                    Width="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                    Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType=ListBoxItem}}">
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <Border Height="Auto" Padding="10,6" BorderThickness="0,0,0,1" BorderBrush="{StaticResource BorderBrush}" MaxHeight="50" Background="Transparent">
+                                            <TextBlock Text="{Binding Text, StringFormat={}★ {0}}" TextWrapping="WrapWithOverflow" Height="Auto" FontSize="14" ToolTip="{Binding Text}" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+        </Grid>
+    </Border>
+    
+</UserControl>

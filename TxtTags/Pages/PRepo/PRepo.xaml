@@ -1,0 +1,188 @@
+﻿<hc:Window x:Class="TxtTags.Pages.PRepo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:app="clr-namespace:TxtTags"
+      xmlns:local="clr-namespace:TxtTags.Pages" Icon="/app.ico"
+      mc:Ignorable="d" Loaded="Window_Loaded" x:Name="me"
+      d:DesignHeight="450" d:DesignWidth="800" FontSize="15" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+      Title="PRepo">
+    <Window.Resources>
+        <local:TagSelectedConvert x:Key="cvtTagSelected" />
+        <app:TagCategoryShowConvert x:Key="cvtTagShow" />
+        <app:BindingProxy x:Key="BindingProxy" Data="{Binding}"/>
+        <Style x:Key="TagCheckBox" TargetType="{x:Type CheckBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Border x:Name="chx_box" BorderBrush="#777777" Background="#999999" BorderThickness="1" CornerRadius="2" Padding="8,2">
+                            <TextBlock x:Name="chx_text" Text="{TemplateBinding Content}" FontSize="14" Foreground="#ffffff" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="BorderBrush" Value="#044289" TargetName="chx_box" ></Setter>
+                                <Setter Property="Background" Value="#326cf3" TargetName="chx_box" ></Setter>
+                                <Setter Property="Foreground" Value="#ffffff" TargetName="chx_text"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <!--<hc:Window.NonClientAreaContent>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Command="app:MainWindow.LockCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource LockGeometry}"
+                        Visibility="{Binding Configer.Locked, Converter={StaticResource cvtHideWhenFalse}}"/>
+                <Button Command="app:MainWindow.LockCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource UnLockGeometry}"
+                        Visibility="{Binding Configer.Locked, Converter={StaticResource cvtShowWhenFalse}}"/>
+            </StackPanel>
+        </Grid>
+    </hc:Window.NonClientAreaContent>-->
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="8,0" x:Name="SearchBar">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="子目录:" VerticalAlignment="Center" Margin="0,0,8,0" />
+                <hc:TextBox x:Name="TxtSubPath" Grid.Column="1" Text="{Binding Option.SubPath, Mode=TwoWay, ElementName=me,UpdateSourceTrigger=PropertyChanged}" PreviewKeyDown="Keywords_PreviewKeyDown" hc:InfoElement.ShowClearButton="True" Height="28"  />
+                <TextBlock Grid.Column="2" Text="关键字:" VerticalAlignment="Center" Margin="8,0" />
+                <hc:TextBox x:Name="TxtKeywords" Grid.Column="3" Text="{Binding Option.Keywords, Mode=TwoWay, ElementName=me,UpdateSourceTrigger=PropertyChanged}" TextChanged="Search_TextChanged" PreviewKeyDown="Keywords_PreviewKeyDown" hc:InfoElement.ShowClearButton="True" Height="28"  />
+                <TextBlock Grid.Column="4" Text="内容搜索:" VerticalAlignment="Center" Margin="8,0" />
+                <hc:TextBox x:Name="TxtContent" Grid.Column="5" Text="{Binding Option.Content, Mode=TwoWay, ElementName=me,UpdateSourceTrigger=PropertyChanged}" PreviewKeyDown="Keywords_PreviewKeyDown" hc:InfoElement.ShowClearButton="True" Height="28" />
+                <app:UStar Grid.Column="6" Count="5" Value="{Binding Option.Star,Mode=TwoWay,ElementName=me}" ValueChanged="UStar_ValueChanged" FalseColor="#DDDDDD" Margin="8,0,0,0" />
+                <CheckBox Grid.Column="7" Content="收藏" Command="local:PRepo.QueryCmd" IsChecked="{Binding Option.Fav, Mode=TwoWay, ElementName=me}" Margin="8,2,0,0" FontSize="{Binding FontSize,ElementName=me}" VerticalAlignment="Center"/>
+                <ToggleButton x:Name="TogglePopupButton" Grid.Column="8" HorizontalAlignment="Center" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" VerticalAlignment="Center" Margin="8,4,0,0">
+                    <StackPanel>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14">
+                            <Run Text="标签" />
+                        </TextBlock>
+                        <Popup Name="myPopup" IsOpen="{Binding IsChecked, ElementName=TogglePopupButton, Mode=TwoWay}" Width="600" Placement="Mouse" StaysOpen="False" AllowsTransparency="True">
+                            <Border CornerRadius="4" Padding="8" Background="#ffffff" BorderBrush="#80333333" BorderThickness="1">
+                                <ItemsControl ItemsSource="{Binding Tags}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <hc:UniformSpacingPanel IsItemsHost="True" ChildWrapping="Wrap" HorizontalSpacing="4" VerticalSpacing="6" Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Content="{Binding Name}" IsChecked="{Binding Checked, Mode=TwoWay}" Style="{DynamicResource TagCheckBox}" Command="local:PRepo.QueryCmd"></CheckBox>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Border>
+                        </Popup>
+                    </StackPanel>
+                </ToggleButton>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60*" />
+                    <ColumnDefinition Width="40*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <DataGrid x:Name="GridFiles" IsReadOnly="True" Margin="8,0,8,0" AllowDrop="True" HeadersVisibility="Column" AutoGenerateColumns="False" ItemsSource="{Binding Files}" RowHeaderWidth="0" MinWidth="800"
+                              HorizontalScrollBarVisibility="Auto" Style="{StaticResource DataGrid.Small}" FontSize="14"
+                              PreviewMouseLeftButtonDown="GridFiles_MouseLeftButtonDown" PreviewMouseLeftButtonUp="GridFiles_MouseLeftButtonUp" PreviewMouseMove="GridFiles_MouseMove"
+                              PreviewMouseDoubleClick="GridFiles_PreviewMouseDoubleClick">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu DataContext="{Binding Data,Source={StaticResource BindingProxy}}">
+                                <MenuItem Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItems.Count, Converter={StaticResource cvtLessShow}, ConverterParameter=2}" 
+                                          Header="打开文件" Command="local:PRepo.OpenFileCmd" />
+                                <MenuItem Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItems.Count, Converter={StaticResource cvtLessShow}, ConverterParameter=2}" 
+                                          Header="打开所在目录" Command="local:PRepo.OpenFilePathCmd" />
+                                <Separator Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItems.Count, Converter={StaticResource cvtLessShow}, ConverterParameter=2}" />
+                                <MenuItem Header="重命名" Command="local:PRepo.RenameCmd" />
+                                <MenuItem Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItems.Count, Converter={StaticResource cvtLessShow}, ConverterParameter=2}" 
+                                          Header="复制文件名" Command="local:PRepo.CopyNameCmd" />
+                                <MenuItem Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItems.Count, Converter={StaticResource cvtLessShow}, ConverterParameter=2}" 
+                                          Header="复制全路径" Command="local:PRepo.CopyPathCmd" />
+                                <MenuItem Header="复制文件" Command="local:PRepo.CopyCmd" />
+                                <Separator />
+                                <MenuItem Header="转编码">
+                                    <MenuItem Header="转为UTF8" Command="local:PRepo.ToEncodingCmd" CommandParameter="UTF8" />
+                                    <MenuItem Header="转为GB18030" Command="local:PRepo.ToEncodingCmd" CommandParameter="GB18030" />
+                                </MenuItem>
+                                <!--<MenuItem Header="标签" ItemsSource="{Binding TagRepo.Items}">
+                                    <MenuItem.ItemTemplate>
+                                        <HierarchicalDataTemplate DataType="{x:Type app:BookTag}" ItemsSource="{Binding Tags}">
+                                            <HierarchicalDataTemplate.ItemContainerStyle>
+                                                <Style TargetType="MenuItem">
+                                                    <Setter Property="Command"  Value="local:PRepo.MakeTagCmd" />
+                                                    <Setter Property="CommandParameter" Value="{Binding}"></Setter>
+                                                </Style>
+                                            </HierarchicalDataTemplate.ItemContainerStyle>
+                                            <TextBlock Text="{Binding}" />
+                                        </HierarchicalDataTemplate>
+                                    </MenuItem.ItemTemplate>
+                                </MenuItem>-->
+                                <MenuItem Header="标签" ItemsSource="{Binding TagRepo.Items}">
+                                    <MenuItem.ItemContainerStyle>
+                                        <Style TargetType="MenuItem">
+                                            <Setter Property="Command"  Value="local:PRepo.MakeTagCmd" />
+                                            <Setter Property="CommandParameter" Value="{Binding Id}"></Setter>
+                                            <Setter Property="Visibility">
+                                                <Setter.Value>
+                                                    <MultiBinding Converter="{StaticResource cvtTagShow}">
+                                                        <Binding />
+                                                        <Binding Path="DataContext.Configer.Locked" RelativeSource="{RelativeSource FindAncestor, AncestorType=ContextMenu}" />
+                                                    </MultiBinding>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </MenuItem.ItemContainerStyle>
+                                    <MenuItem.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type app:BookTag}">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </MenuItem.ItemTemplate>
+                                </MenuItem>
+                                <MenuItem Header="转为简体" Command="local:PRepo.ToChinaCmd" />
+                                <Separator />
+                                <MenuItem Header="删除文件" Command="local:PRepo.DelFileCmd" />
+                                <MenuItem Header="删除目录" Command="local:PRepo.DelFolderCmd" />
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding OrgName}" Header="文件" Width="Auto" />
+                            <DataGridTextColumn Binding="{Binding File.Path}" Header="目录" Width="Auto"/>
+                            <DataGridTextColumn Binding="{Binding File.Size, Converter={StaticResource cvtFontSize}}" Header="大小" Width="100" />
+                            <DataGridTextColumn Binding="{Binding File.Modified, StringFormat={}{0:yy/MM/dd HH:mm}}" Header="最后更新" Width="140"/>
+                            <DataGridTextColumn Binding="{Binding File.Created, StringFormat={}{0:yy/MM/dd HH:mm}}" Header="创建时间" Width="140"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+                <GridSplitter Grid.Column="0" Width="5"/>
+                <Grid Grid.Column="1">
+                    <app:UBook x:Name="BookView" DataSource="{Binding Book}" FontSize="{Binding FontSize,ElementName=me}" />
+                </Grid>
+            </Grid>
+        </Grid>
+        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="#20000000" Width="120" Height="120" CornerRadius="8" 
+                Visibility="{Binding Running, Converter={StaticResource cvtHideWhenFalse}}">
+            <hc:LoadingCircle IsRunning="{Binding Running}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" />
+        </Border>        
+    </Grid>     
+</hc:Window>

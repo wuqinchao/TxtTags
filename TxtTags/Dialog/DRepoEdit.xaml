@@ -1,0 +1,44 @@
+﻿<hc:Window x:Class="TxtTags.Dialog.DRepoEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:local="clr-namespace:TxtTags.Dialog"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner" Topmost="True"
+        Title="仓库" Height="230" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <StackPanel hc:TitleElement.TitleWidth="80" Grid.Row="1" Margin="20,16,17,10">
+                <TextBox hc:TitleElement.Title="仓库名称" hc:TitleElement.TitlePlacement="Left" Style="{StaticResource TextBoxExtend}" Text="{Binding DataSource.Name}"/>
+                <GroupBox Style="{StaticResource GroupBoxOriginal}" Header="管理目录" hc:TitleElement.TitlePlacement="Left" Margin="0,6,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" Text="{Binding DataSource.Path}" IsReadOnly="True" />
+                        <Button Grid.Column="1" Command="local:DRepoEdit.FolderCmd" Content="..." Margin="4,0,0,0" />
+                    </Grid>
+                </GroupBox>
+                <CheckBox Content="私密" IsChecked="{Binding DataSource.Hide}" Margin="80,10,0,0" Visibility="{Binding Configer.Locked, Converter={StaticResource cvtShowWhenFalse}}" />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Background="{StaticResource BorderBrush}"></Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="8">
+                <Button Content="取消" Command="local:DRepoEdit.CancelCmd" Padding="16,5"/>
+                <Button Content="确定" Command="local:DRepoEdit.OkCmd" Style="{StaticResource ButtonPrimary}" Padding="16,5" Margin="8,0,0,0"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</hc:Window>

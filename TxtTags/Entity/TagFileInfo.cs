@@ -145,7 +145,14 @@ namespace TxtTags
         }
         public void Open()
         {
-            System.Diagnostics.Process.Start(Config.Instance.ViewExe, $"\"{File.FullPath}\"");
+            if (string.IsNullOrWhiteSpace(Config.Instance.ViewExe))
+            {
+                System.Diagnostics.Process.Start($"\"{File.FullPath}\"");
+            }
+            else
+            {
+                System.Diagnostics.Process.Start(Config.Instance.ViewExe, $"\"{File.FullPath}\"");
+            }
         }
         public string GetNewName(string org, bool ext=false)
         {

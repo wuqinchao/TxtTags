@@ -95,7 +95,8 @@ namespace TxtTags.Common
         #endregion
 
         private readonly FileVersionInfo VersionInfo = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
-        private string _ViewExe = "\"G:\\GreenTools\\EditPlus 3\\EditPlus.exe\"";
+        //private string _ViewExe = "\"G:\\GreenTools\\EditPlus 3\\EditPlus.exe\"";
+        private string _ViewExe = "";
         private LogLevel logLevel = LogLevel.Error;
         private bool _locked = true;
         private string password;

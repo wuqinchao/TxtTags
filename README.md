@@ -14,7 +14,12 @@
 
 # 阅读
 阅读器基于 [AvalonEdit](https://github.com/icsharpcode/AvalonEdit) 版本：6.3.0
-增加对行高的实时调整支持。
+
+```
+因AvalonEdit无法设置行高， 对此编辑器的TextView增加了LineSpacing属性，使用其能动态调整行高。
+为实现文本滚时，章节目录随内容滚动自动定位，TextView增加了AfterEnsureVisualLines事件，EnsureVisualLines后触发此事件。
+```
+
 ## 1.版面设置
 可设置`字体大小`、`颜色`、`背景色`、`行高`。
 ## 2.章节目录

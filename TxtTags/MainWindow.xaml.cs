@@ -43,8 +43,8 @@ namespace TxtTags
                 "CreateCmd", typeof(MainWindow));
         public static RoutedUICommand SelectCmd = new RoutedUICommand("SelectCmd",
                 "SelectCmd", typeof(MainWindow));
-        public static RoutedUICommand UpateCmd = new RoutedUICommand("UpateCmd",
-                "UpateCmd", typeof(MainWindow));
+        public static RoutedUICommand UpdateCmd = new RoutedUICommand("UpdateCmd",
+                "UpdateCmd", typeof(MainWindow));
         public static RoutedUICommand DeleteCmd = new RoutedUICommand("DeleteCmd",
                 "DeleteCmd", typeof(MainWindow));
 
@@ -83,7 +83,7 @@ namespace TxtTags
             CommandBindings.Add(new CommandBinding(LockCmd, LockHandle));
             CommandBindings.Add(new CommandBinding(SelectCmd, SelectHandler));
             CommandBindings.Add(new CommandBinding(CreateCmd, CreateHandle));
-            CommandBindings.Add(new CommandBinding(UpateCmd, UpdateHandler));
+            CommandBindings.Add(new CommandBinding(UpdateCmd, UpdateHandler));
             CommandBindings.Add(new CommandBinding(DeleteCmd, DeleteHandler));
         }
 
@@ -91,7 +91,6 @@ namespace TxtTags
         {
             //WIcons w = new WIcons();
             //w.Show();
-            //Console.WriteLine(Regex.Replace("1\r\n\r\n2\r\n\r\n\r\n3\r\n4", @"(\r\n){2,}","\r\n"));
         }
         private void ToReposHandle(object sender, ExecutedRoutedEventArgs e)
         {

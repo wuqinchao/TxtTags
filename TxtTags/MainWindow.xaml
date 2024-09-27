@@ -22,12 +22,16 @@
                 <TextBlock Text="{Binding Configer.Version.FileVersion, StringFormat={}v{0}}" FontSize="13" VerticalAlignment="Center" Margin="8,5,0,3" Foreground="#333333"></TextBlock>
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button Command="local:MainWindow.ToTagsCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource ConfigGeometry}"/>
+                <Button Command="local:MainWindow.ToTagsCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource ConfigGeometry}"
+                        ToolTip="标签库管理"/>
                 <Button Command="local:MainWindow.LockCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource LockGeometry}"
-                        Visibility="{Binding Configer.Locked, Converter={StaticResource cvtHideWhenFalse}}"/>
+                        Visibility="{Binding Configer.Locked, Converter={StaticResource cvtHideWhenFalse}}"
+                        ToolTip="解锁私密库"/>
                 <Button Command="local:MainWindow.LockCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource UnLockGeometry}"
-                        Visibility="{Binding Configer.Locked, Converter={StaticResource cvtShowWhenFalse}}"/>
-                <Button Command="local:MainWindow.CreateCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource PlusFillCircleGeometry}" Foreground="{StaticResource DarkPrimaryBrush}" hc:IconElement.Height="16" />
+                        Visibility="{Binding Configer.Locked, Converter={StaticResource cvtShowWhenFalse}}"
+                        ToolTip="锁定私密库"/>
+                <Button Command="local:MainWindow.CreateCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource PlusFillCircleGeometry}" Foreground="{StaticResource DarkPrimaryBrush}" hc:IconElement.Height="16"
+                        ToolTip="添加新书籍库"/>
             </StackPanel>
         </Grid>
     </hc:Window.NonClientAreaContent>
@@ -51,9 +55,13 @@
                                     </MultiBinding>
                                 </Border.Visibility>
                                 <Border.ContextMenu>
-                                    <ContextMenu DataContext="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
-                                        <MenuItem Header="编辑" Command="local:MainWindow.UpateCmd" CommandParameter="{Binding Id}" />
-                                        <MenuItem Header="删除" Command="local:MainWindow.DeleteCmd" CommandParameter="{Binding Id}" />
+                                    <ContextMenu DataContext="{Binding Data,Source={StaticResource BindingProxy}}">
+                                        <MenuItem Header="编辑" 
+                                                  Command="local:MainWindow.UpdateCmd" 
+                                                  CommandParameter="{Binding PlacementTarget.Tag.Id, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
+                                        <MenuItem Header="删除" 
+                                                  Command="local:MainWindow.DeleteCmd" 
+                                                  CommandParameter="{Binding PlacementTarget.Tag.Id, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
                                     </ContextMenu>
                                 </Border.ContextMenu>
                                 <Border.InputBindings>
@@ -63,7 +71,6 @@
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock Text="{Binding Name}" Foreground="#FFFFFF" FontSize="30" />
                                     </StackPanel>
-                                    <!--<Button Command="local:MainWindow.DeleteCmd" CommandParameter="{Binding Id}" Background="{x:Null}" BorderBrush="Transparent" Foreground="#FFFFFF" Width="30" Height="30" Padding="7" hc:IconElement.Geometry="{StaticResource RemoveGeometry}" HorizontalAlignment="Right" VerticalAlignment="Top"/>-->
                                 </Grid>
                             </Border>
                         </DataTemplate>

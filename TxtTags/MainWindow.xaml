@@ -89,5 +89,6 @@
                 <Button Grid.Row="1" Command="local:MainWindow.CreateCmd" Style="{StaticResource ButtonPrimary}" Content="添加" />
             </Grid>
         </Border>
+        <Button Command="local:MainWindow.LinktoCmd" CommandParameter="https://github.com/wuqinchao/TxtTags" ToolTip="查看源代码" Height="36" Padding="0" Margin="6,0,0,6" Style="{StaticResource ButtonIcon}" hc:IconElement.Width="36" hc:IconElement.Height="36" hc:IconElement.Geometry="{StaticResource GithubGeometry}" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
     </Grid>
 </hc:Window>

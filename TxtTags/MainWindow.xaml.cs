@@ -47,6 +47,8 @@ namespace TxtTags
                 "UpdateCmd", typeof(MainWindow));
         public static RoutedUICommand DeleteCmd = new RoutedUICommand("DeleteCmd",
                 "DeleteCmd", typeof(MainWindow));
+        public static RoutedUICommand LinktoCmd = new RoutedUICommand("LinktoCmd",
+                "LinktoCmd", typeof(MainWindow));
 
         public static readonly DependencyProperty DataSourceProperty =
                     DependencyProperty.Register(
@@ -85,6 +87,7 @@ namespace TxtTags
             CommandBindings.Add(new CommandBinding(CreateCmd, CreateHandle));
             CommandBindings.Add(new CommandBinding(UpdateCmd, UpdateHandler));
             CommandBindings.Add(new CommandBinding(DeleteCmd, DeleteHandler));
+            CommandBindings.Add(new CommandBinding(LinktoCmd, LinktoHandler));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -92,11 +95,11 @@ namespace TxtTags
             //WIcons w = new WIcons();
             //w.Show();
         }
-        //private void ToReposHandle(object sender, ExecutedRoutedEventArgs e)
-        //{
-        //    PRepos w = new PRepos();
-        //    WinManager.ShowChild(this, w, true);
-        //}
+        private void LinktoHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(e.Parameter.ToString()));
+            e.Handled = true;
+        }
         private void ToTagsHandle(object sender, ExecutedRoutedEventArgs e)
         {
             WTags w = new WTags();

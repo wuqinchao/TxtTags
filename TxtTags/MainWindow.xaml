@@ -22,7 +22,7 @@
                 <TextBlock Text="{Binding Configer.Version.FileVersion, StringFormat={}v{0}}" FontSize="13" VerticalAlignment="Center" Margin="8,5,0,3" Foreground="#333333"></TextBlock>
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button Command="local:MainWindow.ToTagsCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource ConfigGeometry}"
+                <Button Command="local:MainWindow.ToTagsCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource TagGeometry}"
                         ToolTip="标签库管理"/>
                 <Button Command="local:MainWindow.LockCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource LockGeometry}"
                         Visibility="{Binding Configer.Locked, Converter={StaticResource cvtHideWhenFalse}}"
@@ -36,7 +36,8 @@
         </Grid>
     </hc:Window.NonClientAreaContent>
     <Grid>
-        <Border Padding="40" Grid.Row="1" Style="{StaticResource BorderRegion}" Background="{StaticResource CloudDrawingBrush}">
+        <Border Padding="40" Grid.Row="1" Style="{StaticResource BorderRegion}" Background="{StaticResource CloudDrawingBrush}"
+                Visibility="{Binding DataSource.Items.Count, Converter={StaticResource cvtHideWhenFalse}}">
             <ScrollViewer Grid.Row="1" Padding="16" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Background="Transparent" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" PanningMode="HorizontalOnly">
                 <ItemsControl ItemsSource="{Binding DataSource.Items}">
                     <ItemsControl.ItemsPanel>
@@ -77,6 +78,16 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
+        </Border>
+        <Border Visibility="{Binding DataSource.Items.Count, Converter={StaticResource cvtShowWhenFalse}}">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="请添加书籍库" FontSize="18" Foreground="{StaticResource DarkPrimaryBrush}" Margin="0,0,0,16" />
+                <Button Grid.Row="1" Command="local:MainWindow.CreateCmd" Style="{StaticResource ButtonPrimary}" Content="添加" />
+            </Grid>
         </Border>
     </Grid>
 </hc:Window>

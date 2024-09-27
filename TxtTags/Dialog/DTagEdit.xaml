@@ -19,6 +19,7 @@
                 <TextBox hc:TitleElement.Title="标签" hc:TitleElement.TitlePlacement="Left" Style="{StaticResource TextBoxExtend}" 
                          VerticalContentAlignment="Top" Padding="8"
                          Text="{Binding DataSource.Tag}" Margin="0,6,0,0" TextWrapping="WrapWithOverflow" MinHeight="150"/>
+                <TextBlock Text="每个标签间请使用半角逗号分割" HorizontalAlignment="Right" Margin="0,6,0,0" />
                 <CheckBox Content="私密" IsChecked="{Binding DataSource.Hide}" Margin="80,10,0,0" Visibility="{Binding Configer.Locked, Converter={StaticResource cvtShowWhenFalse}}" />
             </StackPanel>
         </Grid>

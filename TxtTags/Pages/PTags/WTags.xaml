@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button Command="local:WTags.CreateCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource PlusFillCircleGeometry}" Foreground="{StaticResource DarkPrimaryBrush}" hc:IconElement.Height="16" />
+                <Button Command="local:WTags.CreateCmd" ToolTip="添加标签" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource PlusFillCircleGeometry}" Foreground="{StaticResource DarkPrimaryBrush}" hc:IconElement.Height="16" />
             </StackPanel>
         </Grid>
     </hc:Window.NonClientAreaContent>

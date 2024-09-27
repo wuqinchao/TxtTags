@@ -33,8 +33,8 @@ namespace TxtTags
     /// </summary>
     public partial class MainWindow : HandyControl.Controls.Window
     {
-        public static RoutedUICommand ToReposCmd = new RoutedUICommand("ToReposCmd",
-                "ToReposCmd", typeof(MainWindow));
+        //public static RoutedUICommand ToReposCmd = new RoutedUICommand("ToReposCmd",
+        //        "ToReposCmd", typeof(MainWindow));
         public static RoutedUICommand ToTagsCmd = new RoutedUICommand("ToTagsCmd",
                 "ToTagsCmd", typeof(MainWindow));
         public static RoutedUICommand LockCmd = new RoutedUICommand("LockCmd",
@@ -78,7 +78,7 @@ namespace TxtTags
         {
             this.DataContext = this;
             InitializeComponent();
-            CommandBindings.Add(new CommandBinding(ToReposCmd, ToReposHandle));
+            //CommandBindings.Add(new CommandBinding(ToReposCmd, ToReposHandle));
             CommandBindings.Add(new CommandBinding(ToTagsCmd, ToTagsHandle));
             CommandBindings.Add(new CommandBinding(LockCmd, LockHandle));
             CommandBindings.Add(new CommandBinding(SelectCmd, SelectHandler));
@@ -92,11 +92,11 @@ namespace TxtTags
             //WIcons w = new WIcons();
             //w.Show();
         }
-        private void ToReposHandle(object sender, ExecutedRoutedEventArgs e)
-        {
-            PRepos w = new PRepos();
-            WinManager.ShowChild(this, w, true);
-        }
+        //private void ToReposHandle(object sender, ExecutedRoutedEventArgs e)
+        //{
+        //    PRepos w = new PRepos();
+        //    WinManager.ShowChild(this, w, true);
+        //}
         private void ToTagsHandle(object sender, ExecutedRoutedEventArgs e)
         {
             WTags w = new WTags();

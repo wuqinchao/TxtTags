@@ -214,9 +214,6 @@
     <Compile Include="Pages\PRepo\PRepo.xaml.cs">
       <DependentUpon>PRepo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PRepo\PRepos.xaml.cs">
-      <DependentUpon>PRepos.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\PTags\WTags.xaml.cs">
       <DependentUpon>WTags.xaml</DependentUpon>
     </Compile>
@@ -230,10 +227,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\PRepo\PRepo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\PRepo\PRepos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

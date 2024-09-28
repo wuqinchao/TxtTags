@@ -170,6 +170,7 @@ namespace TxtTags
             get { return (Config)GetValue(ConfigerProperty); }
             set { SetValue(ConfigerProperty, value); }
         }
+        private string OrgName;
         public UBookView()
         {
             InitializeComponent();
@@ -269,7 +270,10 @@ namespace TxtTags
         private void RefreshHandle(object sender, ExecutedRoutedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(Url) && System.IO.File.Exists(Url))
+            {
+                OrgName = "";
                 LoadBook();
+            }
         }
         private void MakeBookmarkHandle(object sender, ExecutedRoutedEventArgs e)
         {
@@ -349,7 +353,13 @@ namespace TxtTags
         private static void OnUrlChanged(DependencyObject obj, DependencyPropertyChangedEventArgs r)
         {
             var c = (UBookView)obj;
+            c.SaveHistory();
             c.LoadBook();
+            if (!string.IsNullOrWhiteSpace(r.NewValue.ToString()))
+            {
+                c.OrgName = TagFileInfo.GetOrgName(System.IO.Path.GetFileName(r.NewValue.ToString()));
+                c.ToHistoryOffset();
+            }
         }
         public void LoadBook()
         {
@@ -376,6 +386,8 @@ namespace TxtTags
             if(line != null)
             {
                 var offset = line.StartOffset;
+                //if (!string.IsNullOrWhiteSpace(OrgName))
+                //    HistoryService.Instance.Update(OrgName, offset);
                 if (Catalog.Count > 0)
                 {
                     CatalogInfo pre;
@@ -519,9 +531,34 @@ namespace TxtTags
                 else
                 {
                     HandyControl.Controls.Growl.Info(new HandyControl.Data.GrowlInfo() { Message = result.Message, StaysOpen = false });
-                }
+                }                
             };
             CatalogHelper.Instance.Do(fo);
+        }
+        public void SaveHistory()
+        {
+            if(!string.IsNullOrWhiteSpace(OrgName))
+            {
+                var line = TxtPreview.TextArea.TextView.GetVisualLineFromVisualTop(TxtPreview.TextArea.TextView.ScrollOffset.Y);
+                if (line != null)
+                {
+                    HistoryService.Instance.Update(OrgName, line.StartOffset);
+                }
+                OrgName = "";
+            }
+        }
+        public void ToHistoryOffset()
+        {
+            if (!string.IsNullOrWhiteSpace(OrgName))
+            {
+                var offset = HistoryService.Instance.GetOffset(OrgName);
+                if (offset > 0)
+                {
+                    var r = TxtPreview.Document.GetLocation(offset);
+                    TxtPreview.CaretOffset = Convert.ToInt32(offset);
+                    TxtPreview.ScrollTo(r.Line, r.Column);
+                }
+            }
         }
         private void UBookView_Loaded(object sender, RoutedEventArgs e)
         {

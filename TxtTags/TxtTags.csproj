@@ -97,6 +97,7 @@
       <DependentUpon>UNormalizeOption.xaml</DependentUpon>
     </Compile>
     <Compile Include="LogLevel.cs" />
+    <Compile Include="Service\HistoryService.cs" />
     <Compile Include="Service\LogService.cs" />
     <Compile Include="Service\NormalizeHelper.cs" />
     <Compile Include="Service\CatalogHelper.cs" />

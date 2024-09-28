@@ -25,20 +25,20 @@
                 <TextBlock Text="{Binding Configer.Version.FileVersion, StringFormat={}v{0}}" FontSize="13" VerticalAlignment="Center" Margin="8,5,0,3" Foreground="#333333"></TextBlock>
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button Command="local:MainWindow.ToTagsCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource TagGeometry}"
-                        ToolTip="标签库管理"/>
-                <Button Command="local:MainWindow.LockCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource LockGeometry}"
+                <Button Command="local:MainWindow.ToTagsCmd" hc:IconElement.Geometry="{StaticResource TagGeometry}" BorderThickness="0"
+                        ToolTip="标签库管理" Content="标签库管理"/>
+                <Button Command="local:MainWindow.LockCmd" BorderThickness="0" hc:IconElement.Geometry="{StaticResource LockGeometry}"
                         Visibility="{Binding Configer.Locked, Converter={StaticResource cvtHideWhenFalse}}"
-                        ToolTip="解锁私密库"/>
-                <Button Command="local:MainWindow.LockCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource UnLockGeometry}"
+                        Content="显示私密库"/>
+                <Button Command="local:MainWindow.LockCmd" BorderThickness="0" hc:IconElement.Geometry="{StaticResource UnLockGeometry}"
                         Visibility="{Binding Configer.Locked, Converter={StaticResource cvtShowWhenFalse}}"
-                        ToolTip="锁定私密库"/>
-                <Button Command="local:MainWindow.CreateCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource PlusFillCircleGeometry}" 
+                        Content="隐藏私密库"/>
+                <Button Command="local:MainWindow.CreateCmd" BorderThickness="0" hc:IconElement.Geometry="{StaticResource PlusFillCircleGeometry}" 
                         Foreground="{StaticResource DarkPrimaryBrush}" hc:IconElement.Height="16"
-                        ToolTip="添加新书籍库"/>
-                <Button Command="local:MainWindow.LinktoCmd" CommandParameter="https://github.com/wuqinchao/TxtTags" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource GithubGeometry}" 
+                        Content="添加新书籍库"/>
+                <Button Command="local:MainWindow.LinktoCmd" CommandParameter="https://github.com/wuqinchao/TxtTags" BorderThickness="0" hc:IconElement.Geometry="{StaticResource GithubGeometry}" 
                         Foreground="{StaticResource DarkSuccessBrush}" hc:IconElement.Height="16"
-                        ToolTip="查看源代码"/>
+                        Content="源代码"/>
             </StackPanel>
         </Grid>
     </hc:Window.NonClientAreaContent>
@@ -77,7 +77,7 @@
                                 </Border.InputBindings>
                                 <Grid Margin="10,10">
                                     <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="{Binding Name}" Foreground="#FFFFFF" FontSize="24" />
+                                        <TextBlock Text="{Binding Name}" Foreground="#FFFFFF" FontSize="22" />
                                     </StackPanel>
                                 </Grid>
                             </Border>

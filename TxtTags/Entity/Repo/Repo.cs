@@ -24,7 +24,7 @@ namespace TxtTags
 
         public int CompareTo(Repo other)
         {
-            return Path.CompareTo(other.Name);
+            return Id.CompareTo(other.Id);
         }
         public static void Copy(ref Repo to, Repo from)
         {

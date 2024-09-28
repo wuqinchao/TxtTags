@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <local:TagCategoryShowConvert x:Key="cvtTagShow" />
     </UserControl.Resources>
-    <Grid Margin="0,0,8,8">
+    <Grid Margin="0,0,8,0">
         <Border Background="#FFFFFF" Padding="12" CornerRadius="4"
                 Visibility="{Binding DataSource, ElementName=me, Converter={StaticResource cvtHideWhenFalse}}">
             <Grid>

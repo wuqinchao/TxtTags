@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:hc="https://handyorg.github.io/handycontrol"
       xmlns:app="clr-namespace:TxtTags"
       xmlns:local="clr-namespace:TxtTags.Pages" Icon="/app.ico"
@@ -10,6 +11,11 @@
       d:DesignHeight="450" d:DesignWidth="800" FontSize="15" WindowStartupLocation="CenterScreen" WindowState="Maximized"
       Title="PRepo">
     <Window.Resources>
+        <x:Array Type="sys:String" x:Key="Helps">
+            <sys:String>支持Everything搜索语法</sys:String>
+            <sys:String>双击列表中的图书，可打开阅读窗口</sys:String>
+            <sys:String>选中图书，可用鼠标拖拽一个或多个文件</sys:String>
+        </x:Array>
         <local:TagSelectedConvert x:Key="cvtTagSelected" />
         <app:TagCategoryShowConvert x:Key="cvtTagShow" />
         <app:BindingProxy x:Key="BindingProxy" Data="{Binding}"/>
@@ -52,6 +58,7 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Margin="8,0" x:Name="SearchBar">
                 <Grid.ColumnDefinitions>
@@ -177,6 +184,31 @@
                 <GridSplitter Grid.Column="0" Width="5"/>
                 <Grid Grid.Column="1">
                     <app:UBook x:Name="BookView" DataSource="{Binding Book}" FontSize="{Binding FontSize,ElementName=me}" />
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="3" Background="#ffffff" Margin="8,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Padding="8,0">
+                    <TextBlock Text="{Binding Files.Count, StringFormat=共{0}个文件}" VerticalAlignment="Center" FontSize="12" />
+                </Border>
+                <Grid Grid.Column="1">
+                    <hc:RunningBlock Padding="0,4" BorderThickness="0" AutoRun="True" Orientation="Vertical" Duration="0:0:10" IsRunning="{Binding IsMouseOver,RelativeSource={RelativeSource Self},Converter={StaticResource cvtIsFalse}}" HorizontalAlignment="Stretch">
+                        <ItemsControl ItemsSource="{StaticResource Helps}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <hc:UniformSpacingPanel IsItemsHost="True" Orientation="Vertical" Spacing="5" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=hc:RunningBlock}}" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Padding="0,0,8,0" Text="{Binding}" HorizontalAlignment="Right" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </hc:RunningBlock>
                 </Grid>
             </Grid>
         </Grid>

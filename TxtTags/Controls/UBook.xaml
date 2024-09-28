@@ -22,7 +22,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock Text="{Binding DataSource.OrgName, ElementName=me}" Foreground="#00bcd4" FontWeight="Bold"  Height="Auto" TextWrapping="WrapWithOverflow" Margin="0,0,0,8" />
+                    <TextBlock Text="{Binding DataSource.OrgName, ElementName=me, StringFormat=【预览】：{0}}" Foreground="#00bcd4" FontWeight="Bold"  Height="Auto" TextWrapping="WrapWithOverflow" Margin="0,0,0,8" />
                 </Grid>
                 <Grid Grid.Row="1">
                     <StackPanel Background="#FFFFFF">
@@ -47,7 +47,7 @@
                                 <TextBlock Text="编码:" FontWeight="Bold" VerticalAlignment="Center" Width="40" FontSize="14" />
                                 <TextBlock Text="{Binding DataSource.Encoding.EncodingName, ElementName=me}" FontSize="14" VerticalAlignment="Center" />
                             </StackPanel>
-                            <!--<hc:SplitButton Grid.Column="1" Content="转码" HorizontalAlignment="Stretch">
+                            <!--<hc:SplitButton Grid.Column="1" Content="转换文件编码" HorizontalAlignment="Stretch">
                                 <hc:SplitButton.DropDownContent>
                                     <StackPanel>
                                         <MenuItem Header="转为UTF8" Command="local:UBook.ToEncodingCmd" CommandParameter="UTF8" />
@@ -55,8 +55,8 @@
                                     </StackPanel>
                                 </hc:SplitButton.DropDownContent>
                             </hc:SplitButton>-->
-                            <Button Grid.Column="2" Content="转UTF8" Command="local:UBook.ToEncodingCmd" CommandParameter="UTF8"/>
-                            <Button Grid.Column="1" Content="转GB" Command="local:UBook.ToEncodingCmd" CommandParameter="GB18030"/>
+                            <Button Grid.Column="2" Content="转为UTF8" Command="local:UBook.ToEncodingCmd" CommandParameter="UTF8"/>
+                            <Button Grid.Column="1" Content="转为GB18030" Command="local:UBook.ToEncodingCmd" CommandParameter="GB18030" Margin="0,0,6,0"/>
                         </Grid>
                         <!--<Button Grid.Column="1" Content="Bookmark" Command="local:UBook.MakeBookmarkCmd" CommandParameter="GB18030"/>-->
                         <ItemsControl x:Name="PART_TAGS" ItemsSource="{Binding DataSource.CategoryTags, ElementName=me}">

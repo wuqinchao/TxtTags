@@ -6,7 +6,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:TxtTags"
         mc:Ignorable="d" x:Name="me" WindowStartupLocation="CenterScreen"
-        Title="标签类别" Height="330" Width="500">
+        Title="标签类别" Height="350" Width="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

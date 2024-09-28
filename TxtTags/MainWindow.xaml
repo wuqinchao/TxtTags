@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:cn="clr-namespace:TxtTags.Common"
         xmlns:local="clr-namespace:TxtTags" x:Name="main"
@@ -11,6 +12,8 @@
     <hc:Window.Resources>
         <local:BindingProxy x:Key="BindingProxy" Data="{Binding}"/>
         <local:BookShowConvert x:Key="cvtBookShow" />
+        <sys:Boolean x:Key="BoolTrue">True</sys:Boolean>
+        <sys:Boolean x:Key="BoolFalse">False</sys:Boolean>
     </hc:Window.Resources>
     <hc:Window.NonClientAreaContent>
         <Grid>
@@ -30,8 +33,12 @@
                 <Button Command="local:MainWindow.LockCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource UnLockGeometry}"
                         Visibility="{Binding Configer.Locked, Converter={StaticResource cvtShowWhenFalse}}"
                         ToolTip="锁定私密库"/>
-                <Button Command="local:MainWindow.CreateCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource PlusFillCircleGeometry}" Foreground="{StaticResource DarkPrimaryBrush}" hc:IconElement.Height="16"
+                <Button Command="local:MainWindow.CreateCmd" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource PlusFillCircleGeometry}" 
+                        Foreground="{StaticResource DarkPrimaryBrush}" hc:IconElement.Height="16"
                         ToolTip="添加新书籍库"/>
+                <Button Command="local:MainWindow.LinktoCmd" CommandParameter="https://github.com/wuqinchao/TxtTags" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource GithubGeometry}" 
+                        Foreground="{StaticResource DarkSuccessBrush}" hc:IconElement.Height="16"
+                        ToolTip="查看源代码"/>
             </StackPanel>
         </Grid>
     </hc:Window.NonClientAreaContent>
@@ -39,16 +46,16 @@
         <Border Padding="40" Grid.Row="1" Style="{StaticResource BorderRegion}" Background="{StaticResource CloudDrawingBrush}"
                 Visibility="{Binding DataSource.Items.Count, Converter={StaticResource cvtHideWhenFalse}}">
             <ScrollViewer Grid.Row="1" Padding="16" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Background="Transparent" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" PanningMode="HorizontalOnly">
-                <ItemsControl ItemsSource="{Binding DataSource.Items}">
+                <ItemsControl x:Name="BOOK_VIEWER" ItemsSource="{Binding DataSource.Items}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel Margin="0,0,0,0" IsItemsHost="True" Orientation="Horizontal" VerticalAlignment="Stretch" />
+                            <hc:UniformSpacingPanel IsItemsHost="True" ChildWrapping="Wrap" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Padding="0" Margin="8,8" CornerRadius="4" BorderBrush="{StaticResource DarkPrimaryBrush}" BorderThickness="1" Background="{StaticResource DarkPrimaryBrush}" Width="350" Height="200"
-                                    Tag="{Binding}">
+                            <Border Padding="0" Margin="8,8" CornerRadius="4" BorderBrush="{StaticResource DarkPrimaryBrush}" BorderThickness="1" Background="{StaticResource DarkPrimaryBrush}" 
+                                    Height="160" Width="280" Tag="{Binding}">
                                 <Border.Visibility>
                                     <MultiBinding Converter="{StaticResource cvtBookShow}">
                                         <Binding />
@@ -57,11 +64,11 @@
                                 </Border.Visibility>
                                 <Border.ContextMenu>
                                     <ContextMenu DataContext="{Binding Data,Source={StaticResource BindingProxy}}">
-                                        <MenuItem Header="编辑" 
-                                                  Command="local:MainWindow.UpdateCmd" 
+                                        <MenuItem Header="编辑"
+                                                  Command="{Binding BookUpdateCommand}"
                                                   CommandParameter="{Binding PlacementTarget.Tag.Id, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
                                         <MenuItem Header="删除" 
-                                                  Command="local:MainWindow.DeleteCmd" 
+                                                  Command="{Binding BookDeleteCommand}"
                                                   CommandParameter="{Binding PlacementTarget.Tag.Id, RelativeSource={RelativeSource AncestorType=ContextMenu}}" />
                                     </ContextMenu>
                                 </Border.ContextMenu>
@@ -70,7 +77,7 @@
                                 </Border.InputBindings>
                                 <Grid Margin="10,10">
                                     <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="{Binding Name}" Foreground="#FFFFFF" FontSize="30" />
+                                        <TextBlock Text="{Binding Name}" Foreground="#FFFFFF" FontSize="24" />
                                     </StackPanel>
                                 </Grid>
                             </Border>
@@ -89,6 +96,5 @@
                 <Button Grid.Row="1" Command="local:MainWindow.CreateCmd" Style="{StaticResource ButtonPrimary}" Content="添加" />
             </Grid>
         </Border>
-        <Button Command="local:MainWindow.LinktoCmd" CommandParameter="https://github.com/wuqinchao/TxtTags" ToolTip="查看源代码" Height="36" Padding="0" Margin="6,0,0,6" Style="{StaticResource ButtonIcon}" hc:IconElement.Width="36" hc:IconElement.Height="36" hc:IconElement.Geometry="{StaticResource GithubGeometry}" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
     </Grid>
 </hc:Window>

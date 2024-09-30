@@ -352,11 +352,11 @@ namespace TxtTags
         //}
         private static void OnUrlChanged(DependencyObject obj, DependencyPropertyChangedEventArgs r)
         {
-            var c = (UBookView)obj;
-            c.SaveHistory();
-            c.LoadBook();
-            if (!string.IsNullOrWhiteSpace(r.NewValue.ToString()))
+            if (!string.IsNullOrWhiteSpace((string)r.NewValue))
             {
+                var c = (UBookView)obj;
+                c.SaveHistory();
+                c.LoadBook();
                 c.OrgName = TagFileInfo.GetOrgName(System.IO.Path.GetFileName(r.NewValue.ToString()));
                 c.ToHistoryOffset();
             }

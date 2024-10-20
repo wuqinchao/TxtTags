@@ -33,7 +33,14 @@ namespace TxtTags.Service
         (^(正文[\s\S]*)?([章卷册]{1})[0-9一二三四五六七八九十拾零百佰千仟壹贰叁肆伍陆柒捌玖]+)
 
          */
-        private static readonly Regex REG = new Regex(@"(^(正文(\s)*)?(([～#-=—→☆、]*?)第[0-9一二三四五六七八九十拾零百佰千仟壹贰叁肆伍陆柒捌玖]+[章节節回集卷部篇季话册]{1}))|(^(((CHAPTER)|(PART)|(chapter)|(part)|(Chapter)|(Part))(\s)*\d+))|(^正文(\s)*(.*?)((本纪)|(世家)|(列传)|(表)){1})|(^(正文[\s\S]*)?([章卷册]{1})[0-9一二三四五六七八九十拾零百佰千仟壹贰叁肆伍陆柒捌玖]+)");
+        private static readonly Regex[] REGS = new Regex[] {
+            new Regex(@"(^(正文(\s)*)?(([～#-=—→☆、]*?)第[0-9一二三四五六七八九十拾零百佰千仟壹贰叁肆伍陆柒捌玖]+[章节節回集卷部篇季话册]{1}))"),
+            new Regex(@"(^(((CHAPTER)|(PART)|(chapter)|(part)|(Chapter)|(Part))(\s)*\d+))"),
+            new Regex(@"(^正文(\s)*(.*?)((本纪)|(世家)|(列传)|(表)){1})"),
+            new Regex(@"(^(正文[\s\S]*)?([章卷册]{1})[0-9一二三四五六七八九十拾零百佰千仟壹贰叁肆伍陆柒捌玖]+)"),
+            new Regex(@"^([【\[（]?)[0-9一二三四五六七八九十拾零百佰千仟壹贰叁肆伍陆柒捌玖]{1,8}([）\]】]?)([、\.\s]{1,}\S+)?$"),
+        };
+        //private static readonly Regex REG = new Regex(@"(^(正文(\s)*)?(([～#-=—→☆、]*?)第[0-9一二三四五六七八九十拾零百佰千仟壹贰叁肆伍陆柒捌玖]+[章节節回集卷部篇季话册]{1}))|(^(((CHAPTER)|(PART)|(chapter)|(part)|(Chapter)|(Part))(\s)*\d+))|(^正文(\s)*(.*?)((本纪)|(世家)|(列传)|(表)){1})|(^(正文[\s\S]*)?([章卷册]{1})[0-9一二三四五六七八九十拾零百佰千仟壹贰叁肆伍陆柒捌玖]+)");
         #region 单例
         public static CatalogHelper Instance { get; set; }
 
@@ -122,16 +129,15 @@ namespace TxtTags.Service
         public static bool IsCatalog(string input)
         {
             var r = false;
-            //foreach (var reg in REGS)
-            //{
-            //    if (reg.IsMatch(input) && input.Length<=20)
-            //    {
-            //        return true;
-            //    }
-            //}
             if (input.Length <= 30)
             {
-                return REG.IsMatch(input);
+                foreach (var reg in REGS)
+                {
+                    if (reg.IsMatch(input))
+                    {
+                        return true;
+                    }
+                }
             }
             return r;
         }
